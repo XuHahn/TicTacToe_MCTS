@@ -38,7 +38,6 @@ def AIGame(ai1_sim_num, ai2_sim_num):
 
         if is_win:
             return winner
-
         turn = (turn + 1) % 2
 
 

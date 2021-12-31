@@ -3,6 +3,7 @@
 ## 1、环境配置：
 ```Bash
 pip install -r requirements.txt
+mkdir save_fig # 可选项，可视化文件存储目录
 ```
 ## 2、文件描述：
     TicTacToe_MCTS:
@@ -20,11 +21,11 @@ if __name__ == '__main__':
 ```
     2、改变players = {0: AI1, 1: human}的顺序决定先手/后手
 ```python
-    players = {0: AI1, 1: human}  # 先手/后手
+players = {0: AI1, 1: human}  # 先手/后手
 ```
     0｜  1｜  2
     --------------
     0｜
     1｜
     2｜
-    输入落子点：
+    输入落子点：1,1 （输入落子点用逗号隔开）
