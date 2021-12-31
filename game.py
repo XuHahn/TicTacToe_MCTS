@@ -91,6 +91,9 @@ class State:
 
 
 class Human:
+    def __init__(self, player):
+        self.player = player
+
     def take_action(self, state: State, simulation=0):
         while True:
             txt = input('- 输入落子点：')

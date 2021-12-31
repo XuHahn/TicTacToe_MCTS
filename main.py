@@ -2,11 +2,10 @@ from mcts import *
 
 
 def RunGame(sim):
-    g = Game(start_player=AI_1)
     AI1 = MCTS(AI_1)
-    human = Human()
+    human = Human(AI_2)
     players = {0: AI1, 1: human}  # 先手/后手
-
+    g = Game(start_player=players[0].player)
     turn = 0
     while True:
         current_state = g.state
@@ -42,4 +41,4 @@ def AIGame(ai1_sim_num, ai2_sim_num):
 
 
 if __name__ == '__main__':
-    RunGame(300)  # 难度系数 100 - 800区间
+    RunGame(200)  # 难度系数 100 - 800区间

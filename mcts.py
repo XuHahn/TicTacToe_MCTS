@@ -64,13 +64,13 @@ class MCTS:
     def __init__(self, player):
         self.root = None
         self.current_node = self.root
-        self.__player = player
+        self.player = player
 
     def simulation(self, repeat=1000):
         for _ in range(repeat):
             leaf_node = self.simulation_policy()
             winner = leaf_node.rollout()
-            leaf_node.backpropagation(winner, self.__player)
+            leaf_node.backpropagation(winner, self.player)
 
     def simulation_policy(self):
         current = self.current_node
