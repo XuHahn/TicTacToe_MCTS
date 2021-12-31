@@ -1,5 +1,4 @@
 import seaborn as sns
-import matplotlib.pyplot as plt
 from main import run_game
 from conf import *
 
@@ -14,6 +13,7 @@ def draw_fig(sim_1, sim_2, repeat=10000):
     result = list(data.values())
     fig = sns.barplot(x=['AI_1', 'AI_2', 'DRAW'], y=result)
     get_fig = fig.get_figure()
+    fig.set_title(f'rollout{sim_1}-{sim_2}|result{result[0]}-{result[1]}-{result[2]}')
     get_fig.savefig(f'save_fig/rollout{sim_1}-{sim_2}|result{result[0]}-{result[1]}-{result[2]}', dpi=400)
 
 
