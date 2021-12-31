@@ -1,5 +1,6 @@
 from copy import deepcopy
 
+import numpy as np
 import pandas as pd
 
 from game import *
@@ -14,7 +15,7 @@ class Node:
         self.N = 0
 
     def ucb(self, c=1.4):
-        return -self.Q / self.N + c * np.sqrt(np.log(self.N) / self.N) if self.N != 0 else 0
+        return self.Q / self.N + c * np.sqrt(np.log(self.N) / self.N) if self.N != 0 else np.Inf
 
     def expansion(self):
         for action in [tuple(i) for i in self.state.get_all_is_available_action()]:

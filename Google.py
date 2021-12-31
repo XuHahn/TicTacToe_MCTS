@@ -40,12 +40,15 @@ def SL_policy_Network():
         ]
     )
 
+
 def ValueNetwork():
     return Sequential(
         [
-            Input((19,19,48)),
+            Input((19, 19, 48)),
         ]
     )
+
+
 model = SL_policy_Network()
 model.summary()
 model.compile(optimizer=Adam(), loss=categorical_crossentropy, metrics=['accuracy'])
