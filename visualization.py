@@ -1,12 +1,12 @@
 import seaborn as sns
 from main import AIGame
 from conf import *
-
+from tqdm import tqdm
 data = {AI_1: 0, AI_2: 0, DRAW: 0}
 
 
 def draw_fig(sim_1, sim_2, repeat=10000):
-    for i in range(repeat):
+    for _ in tqdm(range(repeat)):
         winner = AIGame(sim_1, sim_2)
         data[winner] += 1
     sns.set_theme()

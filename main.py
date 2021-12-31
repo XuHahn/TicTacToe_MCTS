@@ -32,7 +32,6 @@ def AIGame(ai1_sim_num, ai2_sim_num):
         action = players[turn].take_action(current_state,
                                            ai1_sim_num if turn == 0 else ai2_sim_num)
         g.take_action(action)
-        g.state.print_board()
         is_win, winner = g.state.isWIn()
 
         if is_win:
