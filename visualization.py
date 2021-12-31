@@ -1,5 +1,5 @@
 import seaborn as sns
-from main import AiGame
+from main import AIGame
 from conf import *
 
 data = {AI_1: 0, AI_2: 0, DRAW: 0}
@@ -7,7 +7,7 @@ data = {AI_1: 0, AI_2: 0, DRAW: 0}
 
 def draw_fig(sim_1, sim_2, repeat=10000):
     for i in range(repeat):
-        winner = AiGame(sim_1, sim_2)
+        winner = AIGame(sim_1, sim_2)
         data[winner] += 1
     sns.set_theme()
     result = list(data.values())
