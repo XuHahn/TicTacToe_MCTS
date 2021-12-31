@@ -1,8 +1,9 @@
+import os
+
 import seaborn as sns
 from main import AIGame
 from conf import *
 from tqdm import tqdm
-import pandas as pd
 
 data = {AI_1: 0, AI_2: 0, DRAW: 0}
 
@@ -22,5 +23,7 @@ def draw_fig(sim_1, sim_2, repeat=10000):
 
 
 if __name__ == '__main__':
+    if not os.path.exists('save_fig'):
+        os.mkdir('save_fig')
     draw_fig(500, 100, 1000)
     draw_fig(200, 200, 1000)

@@ -3,7 +3,6 @@
 ## 1、环境配置：
 ```Bash
 pip install -r requirements.txt
-mkdir save_fig # 可选项，可视化文件存储目录
 ```
 ## 2、文件描述：
     TicTacToe_MCTS:
