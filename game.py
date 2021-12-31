@@ -91,7 +91,7 @@ class State:
 
 
 class Human:
-    def take_action(self, state: State):
+    def take_action(self, state: State, simulation=0):
         while True:
             txt = input('- 输入落子点：')
             x, y = [int(_) for _ in txt.split(' ')]
