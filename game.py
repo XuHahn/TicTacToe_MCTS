@@ -1,6 +1,6 @@
 from conf import *
 import numpy as np
-
+import re
 
 class State:
     def __init__(self, board, player):
@@ -97,7 +97,10 @@ class Human:
     def take_action(self, state: State, simulation=0):
         while True:
             txt = input('- 输入落子点：')
-            x, y = [int(_) for _ in txt.split(' ')]
+            txt = re.findall('[0-9].[0-9]',txt)
+            if len(txt) == 0:
+                continue
+            x, y = [int(_) for _ in txt[0].split(' ')]
             if state.is_available((x, y)):
                 return [x, y]
 

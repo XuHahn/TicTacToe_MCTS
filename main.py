@@ -19,7 +19,6 @@ def RunGame(sim):
 
         turn = (turn + 1) % 2
 
-
 def AIGame(ai1_sim_num, ai2_sim_num):
     g = Game(start_player=AI_1)
     AI1 = MCTS(AI_1)
@@ -40,4 +39,4 @@ def AIGame(ai1_sim_num, ai2_sim_num):
 
 
 if __name__ == '__main__':
-    RunGame(200)  # 难度系数 100 - 800区间
+    RunGame(500)  # 难度系数 100 - 800区间

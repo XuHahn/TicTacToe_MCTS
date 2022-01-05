@@ -18,15 +18,15 @@ class Node:
         return self.Q / self.N + c * np.sqrt(np.log(self.N) / self.N) if self.N != 0 else np.Inf
 
     def expansion(self):
-        for action in [tuple(i) for i in self.state.get_all_is_available_action()]:
-            cur_player = self.state.player
-            next_board = self.state.to_numpy().copy()
-            next_board[action] = cur_player
-            next_player = self.state.next_player(cur_player)
+        for action in [tuple(i) for i in self.state.get_all_is_available_action()]:  # 枚举所有落子点
+            cur_player = self.state.player  # 获取当前玩家
+            next_board = self.state.to_numpy().copy()  # 获取当前棋盘上的情况
+            next_board[action] = cur_player  # 枚举落子
+            next_player = self.state.next_player(cur_player)  # 切换玩家
             next_state = State(next_board, next_player)
-            child_node = Node(next_state, self)
+            child_node = Node(next_state, self)  # 将下一步state加入树中
             self.children[action] = child_node
-        _, node = self.select(2)
+        _, node = self.select(2)  # select一个节点返回，用于rollout
         return node
 
     def select(self, c_param=0):
@@ -67,10 +67,14 @@ class MCTS:
         self.player = player
 
     def simulation(self, repeat=1000):
+        """
+        :param repeat: rollout次数
+        :return:
+        """
         for _ in range(repeat):
-            leaf_node = self.simulation_policy()
-            winner = leaf_node.rollout()
-            leaf_node.backpropagation(winner, self.player)
+            leaf_node = self.simulation_policy()  # 获取叶子节点
+            winner = leaf_node.rollout()  # 对当前叶子节点进行rollout
+            leaf_node.backpropagation(winner, self.player)  # 反向传播更新value
 
     def simulation_policy(self):
         current = self.current_node
