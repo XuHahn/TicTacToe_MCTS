@@ -1,5 +1,5 @@
 from tensorflow.keras import Sequential
-from tensorflow.keras.layers import Conv2D, ReLU, Softmax, Input, ZeroPadding2D, Layer
+from tensorflow.keras.layers import Conv2D, Input, ZeroPadding2D, Layer, Activation, Dense
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.losses import categorical_crossentropy
 
@@ -11,7 +11,7 @@ class SL_Conv(Layer):
                            kernel_size=kernel_size,
                            strides=strides)
         self.pad = ZeroPadding2D((padding, padding))
-        self.activation = ReLU() if activation == 'relu' else Softmax()
+        self.activation = Activation(activation=activation)
 
     def call(self, inputs, *args, **kwargs):
         inputs = self.pad(inputs)
@@ -36,7 +36,7 @@ def SL_policy_Network():
             SL_Conv(filters=192, kernel_size=3, strides=1, padding=1, activation='relu'),
             SL_Conv(filters=192, kernel_size=3, strides=1, padding=1, activation='relu'),
             SL_Conv(filters=192, kernel_size=3, strides=1, padding=1, activation='relu'),
-            SL_Conv(filters=19 * 19, kernel_size=1, strides=1, padding=0, activation='softmax')
+            SL_Conv(filters=1, kernel_size=1, strides=1, padding=0, activation='softmax')
         ]
     )
 
@@ -44,11 +44,26 @@ def SL_policy_Network():
 def ValueNetwork():
     return Sequential(
         [
-            Input((19, 19, 48)),
+            Input(shape=(19, 19, 48)),
+            SL_Conv(filters=192, kernel_size=5, strides=1, padding=2, activation='relu'),
+            SL_Conv(filters=192, kernel_size=3, strides=1, padding=1, activation='relu'),
+            SL_Conv(filters=192, kernel_size=3, strides=1, padding=1, activation='relu'),
+            SL_Conv(filters=192, kernel_size=3, strides=1, padding=1, activation='relu'),
+            SL_Conv(filters=192, kernel_size=3, strides=1, padding=1, activation='relu'),
+            SL_Conv(filters=192, kernel_size=3, strides=1, padding=1, activation='relu'),
+            SL_Conv(filters=192, kernel_size=3, strides=1, padding=1, activation='relu'),
+            SL_Conv(filters=192, kernel_size=3, strides=1, padding=1, activation='relu'),
+            SL_Conv(filters=192, kernel_size=3, strides=1, padding=1, activation='relu'),
+            SL_Conv(filters=192, kernel_size=3, strides=1, padding=1, activation='relu'),
+            SL_Conv(filters=192, kernel_size=3, strides=1, padding=1, activation='relu'),
+            SL_Conv(filters=192, kernel_size=3, strides=1, padding=1, activation='relu'),
+            SL_Conv(filters=1, kernel_size=1, strides=1, padding=0, activation='relu'),
+            Dense(256),
+            Activation('tanh')
         ]
     )
 
 
-model = SL_policy_Network()
+model = ValueNetwork()
 model.summary()
 model.compile(optimizer=Adam(), loss=categorical_crossentropy, metrics=['accuracy'])

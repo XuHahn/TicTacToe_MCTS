@@ -79,7 +79,7 @@ class MCTS:
             if is_win:
                 break
             if current.is_full():
-                _, current = current.select()
+                _, current = current.select(2)
             else:
                 return current.expansion()
         return current
